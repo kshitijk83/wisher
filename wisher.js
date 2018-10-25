@@ -76,6 +76,27 @@
             return this;
         },
 
+        HTMLGreeting: function(selector, formal) {
+            if(!$) {
+                throw 'jQuery is missing';
+            }
+
+            if(!selector) {
+                throw "Missing jQuery selector";
+            }
+
+            var msg;
+            if(formal) {
+                msg = this.formalGreetings();
+            } else {
+                msg = this.greeting();
+            }
+
+            $(selector).html(msg);
+
+            return this;
+        }
+
         
     };
 
@@ -84,6 +105,8 @@
         self.firstname = firstname||"";
         self.lastname = lastname||"";
         self.language = language||"en";
+
+        self.validate(); // to check if the language enter is correct or not
     }
 
     Greeter.init.prototype = Greeter.prototype; // this is used to put prototype of init to Greeter
